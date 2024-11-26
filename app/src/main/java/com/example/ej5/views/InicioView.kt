@@ -113,6 +113,11 @@ fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                                 Text(
+                                    text = "Author: ${it.genre}",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onBackground
+                                )
+                                Text(
                                     text = "Price: $${String.format("%.2f", it.price)}",
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.secondary
@@ -130,7 +135,7 @@ fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel
                                 verticalArrangement = Arrangement.SpaceEvenly // Distribuir botones equitativamente
                             ) {
                                 IconButton(
-                                    onClick = { navController.navigate("editar/${it.id}/${it.title}/${it.author}/${it.price}/${it.pages}") }
+                                    onClick = { navController.navigate("editar/${it.id}/${it.title}/${it.author}/${it.genre}/${it.price}/${it.pages}") }
                                 ) {
                                     Icon(
                                         imageVector = Icons.Default.Edit,

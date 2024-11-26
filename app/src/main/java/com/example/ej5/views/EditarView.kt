@@ -33,7 +33,7 @@ import com.example.ej5.viewmodels.BoookViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditarView (navController: NavController, viewModel: BoookViewModel, id: Int, title: String?, author: String?, price: Float?, pages: Int?){
+fun EditarView (navController: NavController, viewModel: BoookViewModel, id: Int, title: String?, author: String?, genre: String?, price: Float?, pages: Int?){
     Scaffold (
         topBar = {
             CenterAlignedTopAppBar(
@@ -52,14 +52,15 @@ fun EditarView (navController: NavController, viewModel: BoookViewModel, id: Int
             )
         }
     ){
-        ContentEditarView(it, navController, viewModel, id, title, author, price, pages)
+        ContentEditarView(it, navController, viewModel, id, title, author, genre, price, pages)
     }
 }
 
 @Composable
-fun ContentEditarView (it: PaddingValues, navController: NavController, viewModel: BoookViewModel, id: Int, title: String?, author: String?, price: Float?, pages: Int?){
+fun ContentEditarView (it: PaddingValues, navController: NavController, viewModel: BoookViewModel, id: Int, title: String?, author: String?, genre: String?, price: Float?, pages: Int?){
     var title by remember { mutableStateOf(title ?: "") }
     var author by remember { mutableStateOf(author ?: "") }
+    var genre by remember { mutableStateOf(genre ?: "") }
     var price by remember { mutableStateOf(price?.toString() ?: "") }
     var pages by remember { mutableStateOf(pages?.toString() ?: "") }
 
@@ -91,6 +92,16 @@ fun ContentEditarView (it: PaddingValues, navController: NavController, viewMode
         )
 
         OutlinedTextField(
+            value = genre ?: "",
+            onValueChange = {genre = it},
+            label = { Text(text = "Author") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 30.dp)
+                .padding(bottom = 15.dp)
+        )
+
+        OutlinedTextField(
             value = price ?: "",
             onValueChange = {price = it},
             label = { Text(text = "Price") },
@@ -114,7 +125,7 @@ fun ContentEditarView (it: PaddingValues, navController: NavController, viewMode
                 val priceFloat = price.toFloatOrNull() ?: 0.0f // Convertir String a Float
                 val pagesInt = pages.toIntOrNull() ?: 0        // Convertir String a Int
 
-                val book = Book(id = id, title = title!!, author = author!!, price = priceFloat!!, pages = pagesInt!!)
+                val book = Book(id = id, title = title!!, author = author!!, genre = genre!!, price = priceFloat!!, pages = pagesInt!!)
 
                 viewModel.actualizarBook(book)
                 navController.popBackStack()

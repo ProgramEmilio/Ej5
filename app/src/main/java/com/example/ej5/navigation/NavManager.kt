@@ -25,10 +25,11 @@ fun NavManager(viewModel: BoookViewModel){
             AgregarView(navController, viewModel)
         }
 
-        composable("editar/{id}/{title}/{author}/{price}/{pages}", arguments = listOf(
+        composable("editar/{id}/{title}/{author}/{genre}/{price}/{pages}", arguments = listOf(
             navArgument("id"){type = NavType.IntType},
             navArgument("title"){type = NavType.StringType},
             navArgument("author"){type = NavType.StringType},
+            navArgument("genre"){type = NavType.StringType},
             navArgument("price"){type = NavType.FloatType},
             navArgument("pages"){type = NavType.IntType}
         )){
@@ -38,6 +39,7 @@ fun NavManager(viewModel: BoookViewModel){
                 it.arguments!!.getInt("id"),
                 it.arguments?.getString("title"),
                 it.arguments?.getString("author"),
+                it.arguments?.getString("genre"),
                 it.arguments?.getFloat("price"),
                 it.arguments?.getInt("pages")
             )

@@ -12,6 +12,8 @@ data class Book(
         val title: String,
         @ColumnInfo("author")
         val author: String,
+        @ColumnInfo("genre")
+        val genre: String,
         @ColumnInfo("price")
         val price: Float,
         @ColumnInfo("pages")

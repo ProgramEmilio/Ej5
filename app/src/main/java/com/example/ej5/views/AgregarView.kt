@@ -61,6 +61,7 @@ fun AgregarView (navController: NavController, viewModel: BoookViewModel){
 fun ContentAgregarView (it: PaddingValues, navController: NavController, viewModel: BoookViewModel){
     var title by remember { mutableStateOf("") }
     var author by remember { mutableStateOf("") }
+    var genre by remember { mutableStateOf("") }
     var price by remember { mutableStateOf("") }
     var pages by remember { mutableStateOf("") }
 
@@ -85,6 +86,16 @@ fun ContentAgregarView (it: PaddingValues, navController: NavController, viewMod
             value = author,
             onValueChange = {author = it},
             label = { Text(text = "Author") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 30.dp)
+                .padding(bottom = 15.dp)
+        )
+
+        OutlinedTextField(
+            value = genre,
+            onValueChange = {genre = it},
+            label = { Text(text = "Genre") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 30.dp)
@@ -119,13 +130,12 @@ fun ContentAgregarView (it: PaddingValues, navController: NavController, viewMod
                 val book = Book(
                     title = title,
                     author = author,
+                    genre = genre,
                     price = priceFloat,
                     pages = pagesInt
                 )
 
                 viewModel.agregarBook(book)
-
-                println("Nuevo libro añadido: $book") // Verifica en el log
                 navController.popBackStack()
             }
         ) {
